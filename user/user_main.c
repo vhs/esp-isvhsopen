@@ -1,9 +1,11 @@
+#include "espmissingincludes.h"
 #include "ets_sys.h"
 #include "osapi.h"
 #include "gpio.h"
 #include "os_type.h"
 #include "user_interface.h"
 #include "wifi.h"
+#include "httpclient.h"
 
 #define INTERVAL 60000
 #define VHS_OPEN_LED_PIN 12
@@ -15,7 +17,7 @@
 
 LOCAL os_timer_t poll_timer;
 
-LOCAL void http_callback(char * response, int http_status, char * full_response) {
+LOCAL void httpCb(char * response, int http_status, char * full_response) {
   os_printf("HTTP %d: %s\r\n", http_status, response);
 
   if (strcmp(response, "open") == 0) {
@@ -29,7 +31,7 @@ LOCAL void http_callback(char * response, int http_status, char * full_response)
 
 LOCAL void ICACHE_FLASH_ATTR poll_callback(void *arg) {
   os_printf("Is VHS Open?\r\n");
-  http_get("http://api.hackspace.ca/s/vhs/data/door.txt", http_callback);
+  http_get("http://api.hackspace.ca/s/vhs/data/door.txt", httpCb);
 }
 
 LOCAL void wifiConnectCb(uint8_t status) {

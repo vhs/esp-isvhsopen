@@ -4,6 +4,7 @@
  *  Created on: Dec 30, 2014
  *      Author: Minh
  */
+#include "espmissingincludes.h"
 #include "wifi.h"
 #include "user_interface.h"
 #include "osapi.h"
@@ -71,7 +72,7 @@ static void ICACHE_FLASH_ATTR wifi_check_ip(void *arg)
 	}
 }
 
-void ICACHE_FLASH_ATTR WIFI_Connect(uint8_t* ssid, uint8_t* pass, WifiCallback cb)
+void ICACHE_FLASH_ATTR WIFI_Connect(char* ssid, char* pass, WifiCallback cb)
 {
 	struct station_config stationConf;
 
@@ -82,8 +83,8 @@ void ICACHE_FLASH_ATTR WIFI_Connect(uint8_t* ssid, uint8_t* pass, WifiCallback c
 
 	os_memset(&stationConf, 0, sizeof(struct station_config));
 
-	os_sprintf(stationConf.ssid, "%s", ssid);
-	os_sprintf(stationConf.password, "%s", pass);
+	os_sprintf((char *)stationConf.ssid, "%s", ssid);
+	os_sprintf((char *)stationConf.password, "%s", pass);
 
 	wifi_station_set_config(&stationConf);
 

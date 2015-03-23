@@ -10,6 +10,7 @@
 // FIXME: sprintf->snprintf everywhere.
 // FIXME: support null characters in responses.
 
+#include "espmissingincludes.h"
 #include "osapi.h"
 #include "user_interface.h"
 #include "espconn.h"
