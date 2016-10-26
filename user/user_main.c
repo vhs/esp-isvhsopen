@@ -31,7 +31,7 @@ LOCAL void httpCb(char * response, int http_status, char * full_response) {
 
 LOCAL void ICACHE_FLASH_ATTR poll_callback(void *arg) {
   os_printf("Is VHS Open?\r\n");
-  http_get("http://api.hackspace.ca/s/vhs/data/door.txt", httpCb);
+  http_get("http://api.vanhack.ca/s/vhs/data/door.txt", httpCb);
 }
 
 LOCAL void wifiConnectCb(uint8_t status) {
